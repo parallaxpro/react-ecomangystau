@@ -9,8 +9,8 @@ import banner from '../../assets/images/banner.jpg'
 
 import CategoryButton from '../../components/UI/CategoryButton/CategoryButton'
 import PostMinifyRow from '../../components/UI/PostMinifyRow/PostMinifyRow'
-import MainSlide from '../../components/UI/MainSlide/MainSlide'
 import LastetSection from '../../components/UI/LastetSection/LastetSection'
+import MainSlider from '../../components/UI/MainSlider/MainSlider'
 
 class Home extends Component {
 
@@ -48,25 +48,14 @@ class Home extends Component {
 							</div>
 						</div>
 					</div>
-					<div className={'container'}>
-						<div className={classes.slider}>
-							<Swiper>
-								<SwiperSlide><MainSlide /></SwiperSlide>
-								<SwiperSlide><MainSlide /></SwiperSlide>
-							</Swiper>
-						</div>
+					
+					<div className={'container main__slider'}>
+						<MainSlider />
 					</div>
+					
 				</section>
 
 				<LastetSection title={'Гражданское образование'} more={'/'}></LastetSection>
-
-				<section className={classes.section}>
-					<div className="container">
-						<div className={classes.section_header}></div>
-						<div className={classes.section_body}>
-						</div>
-					</div>
-				</section>
 				
 			</div>
 		)

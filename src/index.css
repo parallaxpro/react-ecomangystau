@@ -33,4 +33,29 @@ a {
 	  transform: rotate(360deg);
 	}
   }
-  
+
+.dot{
+  width: 15px;
+  height: 15px;
+  background: #D4DED0;
+  border-radius: 50px;
+}
+
+.slick-active .dot {
+	background: #87B550;
+}
+
+.main__slider .slick-dots {
+	bottom: 0;
+	text-align: left;
+}
+
+.main__slider .slick-dots li {
+	height: 15px;
+}
+
+.main__slider {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	/* padding: ; */
+}
