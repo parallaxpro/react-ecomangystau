@@ -10,6 +10,7 @@ import banner from '../../assets/images/banner.jpg'
 import CategoryButton from '../../components/UI/CategoryButton/CategoryButton'
 import PostMinifyRow from '../../components/UI/PostMinifyRow/PostMinifyRow'
 import MainSlide from '../../components/UI/MainSlide/MainSlide'
+import LastetSection from '../../components/UI/LastetSection/LastetSection'
 
 class Home extends Component {
 
@@ -18,7 +19,6 @@ class Home extends Component {
 			<div className={classes.home}>
 				
 				<section className={classes.bg_gradient}>
-
 					<div className={classes.category_button}>
 						<div className={'container'}>
 							<Swiper spaceBetween={30} slidesPerView={4} breakpoints={{0: {slidesPerView: 1,},576: {slidesPerView: 2,},1024: {slidesPerView: 3,},1200: {slidesPerView: 4,watchOverflow: true}}}>
@@ -29,7 +29,6 @@ class Home extends Component {
 							</Swiper>
 						</div>
 					</div>
-
 					<div className={classes.second}>
 						<div className={'container'}>
 							<div className={'row'}>
@@ -49,7 +48,6 @@ class Home extends Component {
 							</div>
 						</div>
 					</div>
-
 					<div className={'container'}>
 						<div className={classes.slider}>
 							<Swiper>
@@ -58,9 +56,18 @@ class Home extends Component {
 							</Swiper>
 						</div>
 					</div>
-
 				</section>
 
+				<LastetSection title={'Гражданское образование'} more={'/'}></LastetSection>
+
+				<section className={classes.section}>
+					<div className="container">
+						<div className={classes.section_header}></div>
+						<div className={classes.section_body}>
+						</div>
+					</div>
+				</section>
+				
 			</div>
 		)
 	}

@@ -1,16 +1,20 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import Layout from './hoc/Layout/Layout'
 import About from './containers/About/About'
 import Home from './containers/Home/Home'
-import Friends from './containers/Friends/Friends'
 import Category from './containers/Category/Category'
+import Friends from './containers/Friends/Friends'
 import Page from './containers/Page/Page'
-
 import classes from './App.module.sass'
 
 class App extends Component {
+
+	state = {
+		isLoading: true
+	}
+
 	render() {
 		return(
 			<Layout className={classes.App}>
