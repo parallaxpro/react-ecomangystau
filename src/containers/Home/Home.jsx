@@ -11,6 +11,7 @@ import CategoryButton from '../../components/UI/CategoryButton/CategoryButton'
 import PostMinifyRow from '../../components/UI/PostMinifyRow/PostMinifyRow'
 import LastetSection from '../../components/UI/LastetSection/LastetSection'
 import MainSlider from '../../components/UI/MainSlider/MainSlider'
+import SectionVideo from '../../components/UI/LastetSection/SectionVideo/SectionVideo'
 
 class Home extends Component {
 
@@ -56,6 +57,8 @@ class Home extends Component {
 				</section>
 
 				<LastetSection title={'Гражданское образование'} more={'/'}></LastetSection>
+				<SectionVideo title={'Видео'} more={'/'}></SectionVideo>
+				<LastetSection title={'Инциативы'} more={'/'}></LastetSection>
 				
 			</div>
 		)
