@@ -19,13 +19,13 @@ class Video extends Component {
                     <div className={classes.body}>
                         <div className="row">
                             <div className="col-md-4">
-                                <PostVideoMinify image={image_1} title={'КИРИЛЛ ОСИН: Нужна проверка, так как ТОО «Caspian Oil Trans» ...'}></PostVideoMinify>
+                                <PostVideoMinify image={image_1} title={'КИРИЛЛ ОСИН: Нужна проверка, так как ТОО «Caspian Oil Trans» ...'} video={'S1eebleLWeE'}></PostVideoMinify>
                             </div>
                             <div className="col-md-4">
-                                <PostVideoMinify image={image_2} title={'КИРИЛЛ ОСИН: Нужна проверка, так как ТОО «Caspian Oil Trans» ...'}></PostVideoMinify>
+                                <PostVideoMinify image={image_2} title={'КИРИЛЛ ОСИН: Нужна проверка, так как ТОО «Caspian Oil Trans» ...'} video={'S1eebleLWeE'}></PostVideoMinify>
                             </div>
                             <div className="col-md-4">
-                                <PostVideoMinify image={image_3} title={'КИРИЛЛ ОСИН: Нужна проверка, так как ТОО «Caspian Oil Trans» ...'}></PostVideoMinify>
+                                <PostVideoMinify image={image_3} title={'КИРИЛЛ ОСИН: Нужна проверка, так как ТОО «Caspian Oil Trans» ...'} video={'S1eebleLWeE'}></PostVideoMinify>
                             </div>
                         </div>
                     </div>
