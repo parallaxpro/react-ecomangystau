@@ -10,6 +10,7 @@ import LastetSection from '../../components/UI/LastetSection/LastetSection'
 import MainSlider from '../../components/UI/MainSlider/MainSlider'
 import SectionVideo from '../../components/UI/LastetSection/SectionVideo/SectionVideo'
 import ServicesSlider from '../../components/UI/ServicesSlider/ServicesSlider'
+import HomeLoader from '../../components/Loaders/Home/Home'
 
 
 class Home extends Component {
@@ -19,7 +20,8 @@ class Home extends Component {
 			slides: [],
 			lastArticles: [],
 			mainSlider: [],
-		}
+		},
+		isLoading: true
 	}
 
 	renderLastArticles() {
@@ -31,8 +33,17 @@ class Home extends Component {
 	}
 	
 	render() {
-		console.log(this.state.content)
+
+		document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+
 		return (
+			this.state.isLoading ?
+				<section className={classes.bg_gradient}>
+					<div className="container">
+						<HomeLoader />
+					</div>
+				</section>
+			:
 			<div className={classes.home}>
 				
 				<section className={classes.bg_gradient}>
@@ -83,6 +94,10 @@ class Home extends Component {
 				slides: res.data.slides,
 				mainSlider: res.data.mainSlider,
 			} })
+
+			this.setState({ isLoading: false })
+
+			document.getElementsByTagName('body')[0].style.overflow = 'unset';
         })        
 	}
 }
