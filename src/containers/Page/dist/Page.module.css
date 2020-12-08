@@ -1,0 +1,33 @@
+.body {
+  padding: 50px 0;
+}
+.body img {
+  width: 100%;
+}
+
+.desc {
+  font-size: 16px;
+  line-height: 100%;
+  color: rgba(22, 38, 18, 0.5);
+  margin: 0;
+}
+
+.title {
+  margin-bottom: 30px;
+  margin-top: 0;
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 140%;
+}
+
+.img_preview {
+  padding: 0;
+  margin: 50px 0;
+  border-radius: 0px 10px;
+  overflow: hidden;
+}
+.img_preview p {
+  margin: 0;
+}
