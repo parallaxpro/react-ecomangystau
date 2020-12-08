@@ -59,3 +59,7 @@ a {
 	margin-bottom: 50px;
 	/* padding: ; */
 }
+
+.main__slider * {
+	outline: none;
+}

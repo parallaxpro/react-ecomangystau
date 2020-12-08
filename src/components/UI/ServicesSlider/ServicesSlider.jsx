@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
@@ -9,11 +9,6 @@ import CategoryButton from '../CategoryButton/CategoryButton'
 import classes from './ServicesSlider.module.sass'
 
 class ServicesSlider extends Component {
-
-    state = {
-        servicesSlider: [],
-    }
-
     render() {
         const params = {
             spaceBetween: 30,
@@ -36,7 +31,7 @@ class ServicesSlider extends Component {
             <div className={classes.category_button}>
                 <div className={'container'}>
                     <Swiper {...params}>
-                        { this.state.servicesSlider.map((link, index) => {
+                        { this.props.data.map((link, index) => {
                             return <SwiperSlide key={index}><CategoryButton title={link.name} subtitle={link.subname} to={link.url} /></SwiperSlide> 
                         }) }
                     </Swiper>
@@ -48,15 +43,6 @@ class ServicesSlider extends Component {
     componentDidUpdate() {
         this.swiper.update();
     }
-
-    componentDidMount() {
-		axios.get('//ecomangystau-backend/api/menu/down').then(res => {			
-			var $menu = res.data;
-			this.setState({ servicesSlider: $menu.map((index) => {
-				return index
-			}) })
-		})
-	}
 }
 
 export default ServicesSlider

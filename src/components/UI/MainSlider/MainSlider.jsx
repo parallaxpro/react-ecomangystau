@@ -25,8 +25,9 @@ class MainSlider extends Component {
     render() {
         return(
             <Slider {...sliderSettings}>
-                <div className={classes.slide}><Slide /></div>
-                <div className={classes.slide}><Slide /></div>
+                { this.props.data.map((slide, index) => {
+                    return <div className={classes.slide} key={index}><Slide data={slide} /></div>
+                }) }
             </Slider>
         )
     }

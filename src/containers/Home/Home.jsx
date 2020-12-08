@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
 
 import classes from './Home.module.sass'
-import banner from '../../assets/images/banner.jpg'
 
 import PostMinifyRow from '../../components/UI/PostMinifyRow/PostMinifyRow'
 import LastetSection from '../../components/UI/LastetSection/LastetSection'
@@ -14,13 +13,31 @@ import ServicesSlider from '../../components/UI/ServicesSlider/ServicesSlider'
 
 
 class Home extends Component {
+	state = {
+        content: {
+			services: [],
+			slides: [],
+			lastArticles: [],
+			mainSlider: [],
+		}
+	}
+
+	renderLastArticles() {
+		return this.state.content.lastArticles.map((article, index) => {
+			return (
+				<PostMinifyRow key={index} to={article.url} title={article.title} subtitle={article.desc} />
+			)
+		})
+	}
+	
 	render() {
+		console.log(this.state.content)
 		return (
 			<div className={classes.home}>
 				
 				<section className={classes.bg_gradient}>
 
-					<ServicesSlider />
+					<ServicesSlider data={this.state.content.services} />
 					
 					<div className={classes.second}>
 						<div className={'container'}>
@@ -28,15 +45,15 @@ class Home extends Component {
 								<div className={'col-md-8'}>
 									<div className={classes.banner_slider}>
 										<Swiper slidesPerView={1}>
-											<SwiperSlide><Link to="/" className={classes.banner}><img src={banner} alt={'Баннер'} /></Link></SwiperSlide>
+											{ this.state.content.slides.map((slide, index) => {
+												return <SwiperSlide key={index}><a href={slide.link} className={classes.banner}><img src={slide.image} alt={slide.name} /></a></SwiperSlide> 
+											}) }
 										</Swiper>
 									</div>
 								</div>
 								<div className={'col-md-4'}>
 									<h2 className={classes.h2_title}>Последние новости</h2>
-									<PostMinifyRow to="/projects/page1" title={'Общественники продолжают работу по изучению лучших практик по содержани...'} subtitle={'Инициативы • 20 октября 2020 год'} />
-									<PostMinifyRow to="/" title={'Общественники продолжают работу по изучению лучших практик по содержани...'} subtitle={'Инициативы • 20 октября 2020 год'} />
-									<PostMinifyRow to="/" title={'Общественники продолжают работу по изучению лучших практик по содержани...'} subtitle={'Инициативы • 20 октября 2020 год'} />
+									{ this.renderLastArticles() }
 								</div>
 							</div>
 						</div>
@@ -44,7 +61,7 @@ class Home extends Component {
 					</div>
 					
 					<div className={'container main__slider'}>
-						<MainSlider />
+						<MainSlider data={this.state.content.mainSlider} />
 					</div>
 				</section>
 
@@ -56,6 +73,18 @@ class Home extends Component {
 		)
 	}
 
+    componentDidMount() {
+		axios.get('//ecomangystau-backend/api/home').then(res => {			
+			// console.log(res.data);
+
+			this.setState({ content: {
+				services: res.data.services,
+				lastArticles: res.data.lastArticles,
+				slides: res.data.slides,
+				mainSlider: res.data.mainSlider,
+			} })
+        })        
+	}
 }
 
 export default Home 
