@@ -53,6 +53,18 @@ class Page extends Component {
             </article>
         )
     }
+
+    componentDidMount() {
+		const url = window.location;
+		// const segment = url.substring(url.lastIndexOf('/') + 1);
+
+		console.log(url);
+		// axios.get('https://swapi.dev/api/people/1/').then(res => {
+		// 	// console.log(res);
+		// 	this.setState({ person: res.data });
+		// 	this.setState({ isLoading: false });
+		// })
+	}
 }
 
 export default Page

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Progress from '../../components/UI/NProgress/Progress'
+
+import classes from './Category.module.sass'
 
 class Category extends Component {
 
@@ -12,17 +13,22 @@ class Category extends Component {
 	render() {
 		return(
 			<div className={'container'}>
-				<React.Fragment>
-					<Progress isAnimating={this.state.isLoading} />
-				</React.Fragment>
-				<h1>{ this.state.person.name }</h1>
+				<h1 className={classes.title}>{ this.state.person.name }</h1>
 			</div>
 		)
 	}
 
 	componentDidMount() {
+		const url = window.location.pathname;
+		// const segment = url.substring(url.lastIndexOf('/') + 1);
+
+		console.log(url);
+		// const url = document.URL;
+		// const segment = url.substring(url.lastIndexOf('/') + 1);
+
+		// console.log(segment);
 		axios.get('https://swapi.dev/api/people/1/').then(res => {
-			console.log(res);
+			// console.log(res);
 			this.setState({ person: res.data });
 			this.setState({ isLoading: false });
 		})

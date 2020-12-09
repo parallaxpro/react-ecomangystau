@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
+import classes from './MinifySection.module.sass'
 
-import PostVideoMinify from '../../PostVideoMinify/PostVideoMinify'
 import Header from '../Header/Header'
+import PostMinifyColumn from '../../PostMinifyColumn/PostMinifyColumn'
 
-import classes from './SectionVideo.module.sass'
-
-class Video extends Component {
+class MinifySection extends Component {
     render() {
-        return(
+        return (
             <section className={classes.section}>
                 <div className={'container'}>
                     <Header title={ this.props.data.category.name } more={ this.props.data.category.link } />
@@ -17,10 +16,9 @@ class Video extends Component {
                         <div className="row">
 
                             { this.props.data.articles.map((article, index) => {
-                                console.log(article)
                                 return (
-                                    <div className="col-md-4" key={index}>
-                                        <PostVideoMinify image={ article.image } title={ article.title } video={ article.video }></PostVideoMinify>
+                                    <div className="col-md-6" key={index}>
+                                        <PostMinifyColumn to={ article.url } image={ article.image } title={article.title} category={article.category_name} date={article.date}></PostMinifyColumn>
                                     </div>
                                 )
                             }) }
@@ -33,4 +31,4 @@ class Video extends Component {
     }
 }
 
-export default Video
+export default MinifySection

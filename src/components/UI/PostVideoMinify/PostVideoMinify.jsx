@@ -24,7 +24,7 @@ class PostVideoMinify extends Component {
     render() {
         return (
             <React.Fragment>
-                <ModalVideo channel='youtube' isOpen={this.state.isOpen} videoId='L61p2uyiMSo' onClose={() => this.setState({isOpen: false})} />
+                <ModalVideo channel='youtube' isOpen={this.state.isOpen} videoId={ this.props.video } onClose={() => this.setState({isOpen: false})} />
                 <Link to={'/'} className={classes.block} onClick={this.openModal}>
                     <span className={ classes.icon }></span>
                     <h3 className={classes.title}>{this.props.title}</h3>

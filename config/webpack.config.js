@@ -123,6 +123,7 @@ module.exports = function (webpackEnv) {
             require('postcss-preset-env')({
               autoprefixer: {
                 flexbox: 'no-2009',
+                browsers: ['ie >= 8', 'last 4 version']
               },
               stage: 3,
             }),

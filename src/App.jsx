@@ -10,11 +10,6 @@ import Page from './containers/Page/Page'
 import classes from './App.module.sass'
 
 class App extends Component {
-
-	state = {
-		isLoading: true
-	}
-
 	render() {
 		return(
 			<Layout className={classes.App}>

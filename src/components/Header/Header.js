@@ -15,9 +15,11 @@ class Header extends Component {
 
 	renderLinks() {
 		return this.state.menu.map((link, index) => {
-			return (
-				<NavLink key={index} to={link.url} exact={false} activeClassName={classes.active}>{ link.name }</NavLink>
-			)
+			if (link.navlink === true) {
+				return <NavLink key={index} to={link.url} exact={false} activeClassName={classes.active}>{ link.name }</NavLink>
+			} else {
+				return <a key={index} href={link.url}>{ link.name }</a>
+			}
 		})
 	}
 
