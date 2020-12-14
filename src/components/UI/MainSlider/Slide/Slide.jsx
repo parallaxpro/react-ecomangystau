@@ -6,7 +6,7 @@ class MainSlide extends Component {
 	render() {
 		return (
 			<div className={'row'}>
-				<div className={'col-8'}>
+				<div className={'col-md-7 col-xl-8'}>
 					<div className={classes.body}>
 						<div className={classes.category_block}>
 							<Link to={this.props.data.category_link} className={classes.category}>{ this.props.data.category_name }</Link>
@@ -17,7 +17,7 @@ class MainSlide extends Component {
 						</div>
 					</div>
 				</div>
-				<div className={'col-4'}>
+				<div className={'col-md-5 col-xl-4'}>
 					<div className={classes.image_block}>
 						<Link to={ this.props.data.url } className={classes.image}>
 							<img src={ this.props.data.image } alt={ this.props.data.title }/>

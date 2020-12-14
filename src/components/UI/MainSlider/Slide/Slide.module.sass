@@ -72,3 +72,28 @@ $black: #162612
 		top: -10px
 		left: -5px
 		z-index: -1
+
+@media (max-width: 992px)
+	.title
+		display: block
+		font-size: 28px
+	.desc
+		font-size: 16px
+
+@media (max-width: 768px)
+	.category
+		display: inline-block
+	.title_block
+		position: unset
+		top: unset
+		transform: unset
+		margin-top: 20px
+	.desc
+		max-width: unset
+	.image_block
+		margin-top: 20px
+		&::after
+			display: none
+	.image
+		max-width: unset
+		width: 100%

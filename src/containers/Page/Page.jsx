@@ -1,70 +1,116 @@
 import React, { Component } from 'react'
+import Image from "react-modal-image";
+import axios from 'axios'
 import classes from './Page.module.sass'
-import img from '../../assets/images/big_1.jpg'
 
 import PageDesc from '../../components/Page/PageDesc/PageDesc'
 import SeeAlso from '../../components/Page/SeeAlso/SeeAlso'
+import SEO from '../../components/SEO/SEO'
+import Gallery from '../../components/UI/Gallery/Gallery'
+import Content from '../../components/UI/ArticleContent/ArticleContent'
+import Loader from '../../components/Loaders/Page/Page'
+
 
 class Page extends Component {
-    render() {
-        return (
-            <article className={classes.body}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-10 m-auto">
-                            <h1 className={classes.title}>Общественники продолжают работу по изучению лучших практик по содержанию и выгулу домашних животных в Казахстане</h1>
-                            <PageDesc />
-                        </div>
-                    </div>
-                    <div className={classes.article}>
-                        <div className="row">
-                            <div className="col-md-12">
-                                <figure className={classes.img_preview}>
-                                    <p><img src={img} alt={'123'}/></p>
-                                </figure>
-                            </div>
-                            <div className="col-md-10 m-auto">
-                                <p>Напомним, НПУ «Эко Мангистау» совместно с инициативной группой активистов, зоозащитников и волонтеров в рамках программы «Партнерство для инноваций», реализуемой АРГО при поддержке USAID ведет проект по разработке и продвижению нового проекта городских Правил содержания и выгула домашних животных.</p>
-                            </div>
-                            <div className="col-md-10 m-auto">
-                                <p>В настоящий момент завершена работа по анализу городских Правил в 4 городах — Алматы, Нур-Султан, Атырау и Усть-Каменогорск.</p>
-                            </div>
-                            <div className="col-md-10 m-auto">
-                                <p>Определено общее содержание Правил и принципиальные отличия. Лучшие аспекты будут приняты во внимание при подготовке Актауских городских Правил.</p>
-                            </div>
-                            <div className="col-md-10 m-auto">
-                                <p>Напомним, НПУ «Эко Мангистау» совместно с инициативной группой активистов, зоозащитников и волонтеров в рамках программы «Партнерство для инноваций», реализуемой АРГО при поддержке USAID ведет проект по разработке и продвижению нового проекта городских Правил содержания и выгула домашних животных.</p>
-                            </div>
-                            <div className="col-md-10 m-auto">
-                                <p>В настоящий момент завершена работа по анализу городских Правил в 4 городах — Алматы, Нур-Султан, Атырау и Усть-Каменогорск.</p>
-                            </div>
-                            <div className="col-md-10 m-auto">
-                                <p>Определено общее содержание Правил и принципиальные отличия. Лучшие аспекты будут приняты во внимание при подготовке Актауских городских Правил.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-10 m-auto">
-                            <PageDesc />
-                        </div>
-                    </div>
-                </div>
-                <SeeAlso />
-            </article>
-        )
+
+    constructor(props) {
+        super(props)
+        this.state = { loading: true }
+    }
+
+    getArticle(category_slug, article_slug) {
+        // window.scrollTo(0, 0)
+        axios.get('//storage.ecomangystau.kz/api/c/article/' + category_slug + '/' + article_slug + '').then(response => {
+            this.setState({ article: response.data })
+        }).finally(() => this.setState({ loading: false }))
     }
 
     componentDidMount() {
-		const url = window.location;
-		// const segment = url.substring(url.lastIndexOf('/') + 1);
+        let thisCategorySlug = this.props.match.params.category
+        let thisArticleSlug = this.props.match.params.page
 
-		console.log(url);
-		// axios.get('https://swapi.dev/api/people/1/').then(res => {
-		// 	// console.log(res);
-		// 	this.setState({ person: res.data });
-		// 	this.setState({ isLoading: false });
-		// })
-	}
+        this.getArticle(thisCategorySlug, thisArticleSlug)
+    }
+    
+    shouldComponentUpdate(nextProps) {
+        return nextProps.match.params.page !== this.props.match.params.page || this.props.match.params.page
+    }
+    
+    componentDidUpdate(prevProps) {
+        if (this.props.location !== prevProps.location) {
+            this.getArticle(this.props.match.params.category, this.props.match.params.page)
+            this.setState({ loading: true })
+        }
+    }
+
+    render() {
+        if (this.state.loading) {
+            window.scrollTo(0, 0);
+            return (
+                <div className={classes.loading}>
+                    <div className="container">
+                        <Loader />
+                    </div>
+                </div>
+            )
+        } else {
+            // console.log(this.state.article)
+
+            let image = () => {
+                if (this.state.article.image) {
+                    return (
+                        <div className="col-md-12">
+                            <figure className={classes.img_preview}>
+                                <p><Image small={ this.state.article.image } large={ this.state.article.image } alt={ this.state.article.title } /></p>
+                            </figure>
+                        </div>
+                    )
+                } else {
+                    return ''
+                }
+            }
+
+            return (
+                <article className={classes.body}>
+
+                    {/* IN HEAD DOCUMENT */}
+                        <SEO data={ this.state.article.seo } />
+                    {/* *** */}
+
+                    <div className="container">
+                        <div className={classes.header}>
+                            <div className="row">
+                                <div className="col-md-10 m-auto">
+                                    <h1 className={classes.title}>{ this.state.article.title }</h1>
+                                    <PageDesc title={ this.state.article.title } desc={ this.state.article.desc } category={ this.state.article.category_name } to={ this.state.article.category_link } date={ this.state.article.date } />
+                                </div>
+                            </div>
+                        </div>
+                        <div className={classes.article}>
+                            <div className="row">
+                               
+                               { image() }
+
+                                <div className={'col-md-12'}>
+                                    <Content article={ this.state.article.content } />
+                                </div>
+
+                                <div className="col-md-12"><Gallery images={this.state.article.gallery} title={this.state.article.title} /></div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-10 m-auto">
+                                <PageDesc title={ this.state.article.title } desc={ this.state.article.desc } category={ this.state.article.category_name } to={ this.state.article.category_link } date={ this.state.article.date } />
+                            </div>
+                        </div>
+                    </div>
+
+                    <SeeAlso articles={ this.state.article.other } />
+
+                </article>
+            )
+        }
+    }
 }
 
 export default Page

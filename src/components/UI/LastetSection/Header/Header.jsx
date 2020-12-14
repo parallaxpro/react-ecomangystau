@@ -8,11 +8,11 @@ class Header extends Component {
         return (
             <div className={classes.block}>
                 <div className="row align-items-center">
-                    <div className="col-md-6">
+                    <div className="col-md-8">
                         <h2 className={classes.h2_title}>{ this.props.title }</h2>
                     </div>
                     { more ? (
-                        <div className="col-md-6 justify-content-end d-flex">
+                        <div className="col-md-4 justify-content-md-end mt-3 mt-md-0 d-flex">
                             <Link to={ this.props.more } className={classes.button}>Посмотреть все</Link>
                         </div>
                     ) : ('') }

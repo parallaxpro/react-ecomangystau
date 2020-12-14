@@ -18,8 +18,10 @@ class LastetSection extends Component {
 
                             { this.props.data.articles[0].map((article, index) => {
                                 return (
-                                    <div className="col-md-4" key={index}>
-                                        <PostMinifyColumn to={ article.url } image={ article.image } title={article.title} desc={article.desc} date={article.footer}></PostMinifyColumn>
+                                    <div className="col-xl-4 col-lg-6" key={index}>
+                                        <div className={classes.block}>
+                                            <PostMinifyColumn to={ article.url } image={ article.image } title={article.title} desc={article.desc} date={article.footer}></PostMinifyColumn>
+                                        </div>
                                     </div>
                                 )
                             }) }
@@ -31,8 +33,10 @@ class LastetSection extends Component {
                     <div className="row">
                         { this.props.data.articles[1].map((article, index) => {
                             return (
-                                <div className="col-md-4" key={index}>
-                                    <PostMinifyRow to={ article.url } title={ article.title } subtitle={ article.footer }></PostMinifyRow>
+                                <div className="col-xl-4" key={index}>
+                                    <div className={classes.block}>
+                                        <PostMinifyRow to={ article.url } title={ article.title } subtitle={ article.footer }></PostMinifyRow>
+                                    </div>
                                 </div>
                             )
                         }) }

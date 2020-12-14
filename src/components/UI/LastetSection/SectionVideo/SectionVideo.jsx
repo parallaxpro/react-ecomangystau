@@ -17,10 +17,11 @@ class Video extends Component {
                         <div className="row">
 
                             { this.props.data.articles.map((article, index) => {
-                                console.log(article)
                                 return (
                                     <div className="col-md-4" key={index}>
-                                        <PostVideoMinify image={ article.image } title={ article.title } video={ article.video }></PostVideoMinify>
+                                        <div className={classes.block}>
+                                            <PostVideoMinify image={ article.image } title={ article.title } video={ article.video }></PostVideoMinify>
+                                        </div>
                                     </div>
                                 )
                             }) }

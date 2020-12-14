@@ -19,7 +19,7 @@ class Footer extends Component {
 									<p className={classes.logotype_desc}>Неправительственное учреждение “Эко Мангистау”<br />— внепартийная, некоммерческая и не государственная организация.</p>
 								</div>
 								<div className={classes.block_footer}>
-									<div className="row">
+									<div className="row align-items-center">
 										<div className="col-6">
 											<p>Свяжитесь с нами: <a href="mailto:info@ecomangystau.kz">info@ecomangystau.kz</a></p>
 										</div>

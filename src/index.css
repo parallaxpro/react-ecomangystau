@@ -1,3 +1,7 @@
+/* html {
+	scroll-behavior: smooth;
+} */
+
 body {
 	margin: 0;
 	font-family: 'Roboto', sans-serif;
@@ -62,4 +66,53 @@ a {
 
 .main__slider * {
 	outline: none;
+}
+
+.__react_modal_image__medium_img {
+	-o-object-fit: contain !important;
+	object-fit: contain !important;
+}
+
+.back_to_top-show {
+	display: flex !important;
+}
+
+.__react_modal_image__caption {
+	font-size: 100% !important;
+	line-height: 100% !important;
+}
+
+
+
+@media (max-width: 992px) {
+	.logotype img {
+		width: 100%;
+	}
+	
+	.logotype {
+		display: flex;
+	}
+}
+
+.w-100 {
+	width: 100%;
+}
+
+.main-nav {
+	transition: height 0.5s ease-out
+}
+
+.main-nav * {
+	transition: height 0.5s ease-out
+}
+
+[id=main-nav]{
+	visibility: hidden;
+	height: 0;
+	overflow: hidden;
+	transition: height 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.slick-slide.slick-active {
+	z-index: 9;
 }

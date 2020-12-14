@@ -4,10 +4,21 @@ import classes from './CategoryButton.module.sass'
 
 class CategoryButton extends Component {
     render() {
+
+        const desc = () => {
+            if (this.props.subtitle) {
+                return <p className={classes.subtitle}>{ this.props.subtitle }</p>
+            } else {
+                return ''
+            }
+        }
+
         return(
             <Link to={ this.props.to } className={classes.button}>
-                <h3 className={classes.title}>{ this.props.title }</h3>
-                <p className={classes.subtitle}>{ this.props.subtitle }</p>
+                <div>
+                    <h3 className={classes.title}>{ this.props.title }</h3>
+                    { desc() }
+                </div>
             </Link>
         )
     }

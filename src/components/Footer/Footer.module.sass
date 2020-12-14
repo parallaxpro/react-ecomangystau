@@ -2,7 +2,9 @@
 	background: url('../../assets/images/footer-bg.jpg') 50% no-repeat
 	background-size: cover
 	padding: 100px 0px
-	margin: 30px 80px
+	margin: auto 80px
+	margin-top: 80px
+	margin-bottom: 30px
 	border-radius: 10px
 
 .logotype_desc
@@ -22,6 +24,20 @@
 	display: flex
 	margin-bottom: 30px
 	align-items: center
+
+@media (max-width: 992px)
+	.block_header
+		display: block
+	.logotype_desc
+		margin-top: 20px !important
+		margin-left: 0 !important
+
+@media (max-width: 576px)
+	.footer
+		padding: 50px 0
+		margin: auto 15px
+		margin-top: 50px
+		margin-bottom: 30px
 
 .i_facebook:before
 	content: ''

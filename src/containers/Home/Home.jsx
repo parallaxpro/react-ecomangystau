@@ -12,6 +12,7 @@ import MainSlider from '../../components/UI/MainSlider/MainSlider'
 import SectionVideo from '../../components/UI/LastetSection/SectionVideo/SectionVideo'
 import ServicesSlider from '../../components/UI/ServicesSlider/ServicesSlider'
 import HomeLoader from '../../components/Loaders/Home/Home'
+import SEO 				from '../../components/SEO/SEO'
 
 
 class Home extends Component {
@@ -36,6 +37,7 @@ class Home extends Component {
 	
 	render() {
 
+		window.scrollTo(0, 0)
 		document.getElementsByTagName('body')[0].style.overflow = 'hidden';
 
 		return (
@@ -47,6 +49,10 @@ class Home extends Component {
 				</section>
 			:
 			<div className={classes.home}>
+
+				{/* IN HEAD DOCUMENT */}
+					<SEO data={ this.state.content.seo } />
+				{/* *** */}
 				
 				<section className={classes.bg_gradient}>
 
@@ -55,16 +61,16 @@ class Home extends Component {
 					<div className={classes.second}>
 						<div className={'container'}>
 							<div className={'row'}>
-								<div className={'col-md-8'}>
+								<div className={'col-xl-8'}>
 									<div className={classes.banner_slider}>
-										<Swiper slidesPerView={1}>
+										<Swiper>
 											{ this.state.content.slides.map((slide, index) => {
 												return <SwiperSlide key={index}><a href={slide.link} className={classes.banner}><img src={slide.image} alt={slide.name} /></a></SwiperSlide> 
 											}) }
 										</Swiper>
 									</div>
 								</div>
-								<div className={'col-md-4'}>
+								<div className={'col-xl-4 mt-4 mt-xl-0'}>
 									<h2 className={classes.h2_title}>Последние новости</h2>
 									{ this.renderLastArticles() }
 								</div>
@@ -80,28 +86,31 @@ class Home extends Component {
 
 				<LastetSection data={this.state.content.categories[1]}/>
 				<SectionVideo data={this.state.content.categories[2]}/>
-				<LastetSection data={this.state.content.categories[3]} />
+				{ this.state.content.categories[3] ? <LastetSection data={this.state.content.categories[3]} /> : ''}
 				<MinifySection data={this.state.content.categories[4]} />
+				<LastetSection data={this.state.content.categories[5]} />
+				<MinifySection data={this.state.content.categories[6]} />
+				<LastetSection data={this.state.content.categories[7]} />
 				
 			</div>
 		)
 	}
 
-    componentDidMount() {
-		axios.get('//ecomangystau-backend/api/home').then(res => {			
+    componentDidMount() {	
+		axios.get('//storage.ecomangystau.kz/api/home').then(res => {			
 
 			this.setState({ content: {
 				services: res.data.services,
 				lastArticles: res.data.lastArticles,
 				slides: res.data.slides,
 				mainSlider: res.data.mainSlider,
-				categories: res.data.categories
+				categories: res.data.categories,
+				seo: res.data.seo
 			} })
 
 			this.setState({ isLoading: false })
-
 			document.getElementsByTagName('body')[0].style.overflow = 'unset';
-        })        
+        })
 	}
 }
 

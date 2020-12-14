@@ -13,7 +13,6 @@ const sliderSettings = {
 	speed: 500,
 	slidesToShow: 1,
     slidesToScroll: 1,
-    // swipeToSlide: true,
     fade: true,
     arrows: false,
     customPaging: i => (
