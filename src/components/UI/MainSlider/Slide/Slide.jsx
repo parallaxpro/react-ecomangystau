@@ -8,10 +8,8 @@ class MainSlide extends Component {
 			<div className={'row'}>
 				<div className={'col-md-7 col-xl-8'}>
 					<div className={classes.body}>
-						<div className={classes.category_block}>
-							<Link to={this.props.data.category_link} className={classes.category}>{ this.props.data.category_name }</Link>
-						</div>
 						<div className={classes.title_block}>
+							<Link to={this.props.data.category_link} className={classes.category}>{ this.props.data.category_name }</Link>
 							<Link to={ this.props.data.url } className={classes.title}>{ this.props.data.title }</Link>
 							<p className={classes.desc}>{ this.props.data.desc }</p>
 						</div>

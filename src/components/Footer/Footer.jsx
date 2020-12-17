@@ -1,10 +1,23 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 import classes from './Footer.module.sass'
 import logo from '../../assets/logo.svg'
 
 class Footer extends Component {
+
+	state = {
+		loading: true
+	}
+
+	_renderEmail() {
+		if (!this.state.loading) {
+			return <p>Свяжитесь с нами: <a href={`mailto:${this.state.footer.email}`}>{ this.state.footer.email }</a></p>
+		}
+
+		return ''
+	}
+
 	render() {
 		return(
 			<footer className={classes.footer}>
@@ -21,12 +34,12 @@ class Footer extends Component {
 								<div className={classes.block_footer}>
 									<div className="row align-items-center">
 										<div className="col-6">
-											<p>Свяжитесь с нами: <a href="mailto:info@ecomangystau.kz">info@ecomangystau.kz</a></p>
+											{ this._renderEmail() }
 										</div>
 										<div className="col-6 justify-content-end d-flex">
-											<a href="https://instagram.com/" rel="noopener noreferrer" target={'_blank'} className={classes.s_link}><div className={classes.i_facebook}></div></a>
-											<a href="https://instagram.com/" rel="noopener noreferrer" target={'_blank'} className={classes.s_link}><div className={classes.i_instagram}></div></a>
-											<a href="https://instagram.com/" rel="noopener noreferrer" target={'_blank'} className={classes.s_link}><div className={classes.i_yt}></div></a>
+											<a href="https://www.facebook.com/ecomangystau.kz/" rel="noopener noreferrer" target={'_blank'} className={classes.s_link}><div className={classes.i_facebook}></div></a>
+											<a href="https://www.instagram.com/ekomangystau/" rel="noopener noreferrer" target={'_blank'} className={classes.s_link}><div className={classes.i_instagram}></div></a>
+											<a href="https://www.youtube.com/user/ecomangystau" rel="noopener noreferrer" target={'_blank'} className={classes.s_link}><div className={classes.i_yt}></div></a>
 										</div>
 									</div>
 								</div>
@@ -36,6 +49,15 @@ class Footer extends Component {
                 </div>
 			</footer>
 		)
+	}
+
+	componentDidMount() {
+		axios.get('//ecomangystau-backend/api/footer').then(res => {			
+			var footer = res.data;
+			this.setState({ footer: footer })
+			this.setState({ loading: false })
+			// console.log(this.state.footer.menu);
+		})
 	}
 }
 

@@ -1,28 +1,33 @@
-import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link, withRouter } from 'react-router-dom'
 import classes from './PostMinifyColumn.module.sass'
 
-class PostMinifyColumn extends Component {
-    render() {
-        return(
-            <Link to={ this.props.to } className={classes.block}>
-                <div className="row">
-                    <div className="col-sm-6">
-                        <div className={classes.image}>
-                            <img src={this.props.image} alt={this.props.title} />
-                        </div>
-                    </div>
-                    <div className="col-sm-6">
-                        <div className={classes.content}>
-                            <p className={classes.category}>{ this.props.category }</p>
-                            <h3 className={classes.title}>{ this.props.title }</h3>
-                            <p className={classes.date}>{ this.props.date }</p>
-                        </div>
+function PostMinifyColumn(props) {
+
+    function _handleClick(event, link) {
+        event.preventDefault();
+        props.history.push(link)
+        console.log(link)
+    }
+
+    return (
+        <Link to={ props.to } className={classes.block}>
+            <article className="row">
+                <div className="col-sm-6">
+                    <div className={classes.image}>
+                        <img src={props.image} alt={props.title} />
                     </div>
                 </div>
-            </Link>
-        )
-    }
+                <div className="col-sm-6">
+                    <div className={classes.content}>
+                        <p className={classes.category} onClick={ event => _handleClick(event, props.category_link) }>{ props.category }</p>
+                        <h3 className={classes.title}>{ props.title }</h3>
+                        <p className={classes.date}>{ props.date }</p>
+                    </div>
+                </div>
+            </article>
+        </Link>
+    )
 }
 
-export default PostMinifyColumn
+export default withRouter(PostMinifyColumn)

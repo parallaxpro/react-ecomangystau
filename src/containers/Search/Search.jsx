@@ -21,7 +21,7 @@ class Search extends Component {
     }
 
     renderResults() {
-        if (this.state.data.pages !== null) {
+        if (this.state.data.pages) {
             const pages = this.state.data.pages
             return (
                 pages.map((page, index) => {
