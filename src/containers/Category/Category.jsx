@@ -6,6 +6,7 @@ import ShareButtons from '../../components/UI/ShareButtons/ShareButtons'
 import SEO from '../../components/SEO/SEO'
 import PostColumn from '../../components/UI/PostColumn/PostColumn'
 import PostVideo from '../../components/UI/PostVideoMinify/PostVideoMinify'
+import NotFound from '../404/404'
 
 import classes from './Category.module.sass'
 
@@ -18,27 +19,52 @@ function Category() {
 	const [loading, setLoading] 			= useState(true)
 	const [loadingInfo, setLoadingInfo] 	= useState(true)
 	const [fetching, setFetching] 			= useState(true)
+	const [currentSlug, setCurrentSlug]		= useState()
+	const [notFound, setNotFound]			= useState(false)
+
+	function getSetting() {
+		window.scrollTo(0, 0)
+		axios.get('//ecomangystau-backend/api/c/info' + window.location.pathname + '').then(response => {
+			setSetting(response.data);
+			setCurrentSlug(window.location.pathname);
+		}).finally(() => setLoadingInfo(false))
+	}
+
+	function getData() {
+		axios.get(`//ecomangystau-backend/api/c/articles` + window.location.pathname + `?page=1`)
+			.then(response => {
+				setArticles(response.data.articles)
+				setLastPage(response.data.pagination.lastPage + 1)
+				setLoading(false)
+				setCurrentPage(2)
+			})
+			.finally(() => {setFetching(false)})
+	}
 
 	useEffect(() => {
 		if (loadingInfo) {
-			window.scrollTo(0, 0)
-			axios.get('//storage.ecomangystau.kz/api/c/info' + window.location.pathname + '').then(response => {
-				setSetting(response.data);
-			}).finally(() => setLoadingInfo(false))
+			getSetting()
 		}
 	}, [loadingInfo])
 
 	useEffect(() => {
 		if (fetching) {
 			if (lastPage !== currentPage) {
-				axios.get(`//storage.ecomangystau.kz/api/c/articles` + window.location.pathname + `?page=${currentPage}`)
-						.then(response => {
+				axios.get(`//ecomangystau-backend/api/c/articles` + window.location.pathname + `?page=${currentPage}`)
+					.then(response => {
+						if (response.data.articles) {
 							setArticles(articles => [...articles, ...response.data.articles])
 							setLastPage(response.data.pagination.lastPage + 1)
 							setLoading(false)
 							setCurrentPage( prevState => prevState + 1 )
-						})
-						.finally(() => {setFetching(false)})
+						}
+
+						if (response.data.status === 404) {
+							setLoading(false)
+							setNotFound(true)
+						}
+					})
+					.finally(() => {setFetching(false)})
 			}
 		}
 	}, [fetching])
@@ -67,6 +93,18 @@ function Category() {
 		)
 	}
 	
+	if (!loading) {
+		if (currentSlug !== window.location.pathname) {
+			setCurrentSlug(window.location.pathname)
+			getSetting()
+			getData()
+		}
+	}
+
+	if (notFound) {
+		return <NotFound />
+	}
+
 	return (
 		<div className={classes.body}>
 

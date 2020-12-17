@@ -54,5 +54,29 @@ $green: #87B550
         display: flex
         padding: 15px 20px
         border-radius: 0 10px 0 10px
-    a.active
-        background: rgba(135, 181, 80, 0.05)
+        &:hover, .active
+            background: rgba(135, 181, 80, 0.05)
+
+hr
+    border: 0
+    height: 1px
+    background: rgba($black, 0.1)
+
+.selected
+    position: relative
+    color: $green !important
+    &::after
+        content: ''
+        position: absolute
+        left: -7px
+        right: -7px
+        top: -5px
+        bottom: -5px
+        background: rgba($green, 0.15)
+        border-radius: 3px
+    &:hover
+        color: white !important
+        z-index: 1
+        &::after
+            background: $green
+            z-index: -1

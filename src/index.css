@@ -106,7 +106,7 @@ a {
 	transition: height 0.5s ease-out
 }
 
-[id=main-nav]{
+[id=main-nav], [id=main-nav-category]{
 	visibility: hidden;
 	height: 0;
 	overflow: hidden;

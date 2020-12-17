@@ -40,6 +40,13 @@ class Home extends Component {
 		window.scrollTo(0, 0)
 		document.getElementsByTagName('body')[0].style.overflow = 'hidden';
 
+		const paramsSlider = {
+			autoplay: {
+				delay: 2500,
+				disableOnInteraction: false
+			},
+		}
+
 		return (
 			this.state.isLoading ?
 				<section className={classes.bg_gradient}>
@@ -63,7 +70,7 @@ class Home extends Component {
 							<div className={'row'}>
 								<div className={'col-xl-8'}>
 									<div className={classes.banner_slider}>
-										<Swiper>
+										<Swiper {...paramsSlider}>
 											{ this.state.content.slides.map((slide, index) => {
 												return <SwiperSlide key={index}><a href={slide.link} className={classes.banner}><img src={slide.image} alt={slide.name} /></a></SwiperSlide> 
 											}) }
@@ -97,7 +104,7 @@ class Home extends Component {
 	}
 
     componentDidMount() {	
-		axios.get('//storage.ecomangystau.kz/api/home').then(res => {			
+		axios.get('//ecomangystau-backend/api/home').then(res => {			
 
 			this.setState({ content: {
 				services: res.data.services,

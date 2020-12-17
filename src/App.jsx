@@ -10,6 +10,7 @@ import Services from './containers/Services/Services'
 import ServicePage from './containers/ServicePage/ServicePage'
 import classes from './App.module.sass'
 import Search from './containers/Search/Search'
+import NotFound from './containers/404/404';
 
 class App extends Component {
 	render() {
@@ -23,6 +24,7 @@ class App extends Component {
 					<Route path="/services/" 		component={Services} />
 					<Route path="/:category/:page" 	component={Page} />
 					<Route path="/:category" 		component={Category} />
+					<Route component={NotFound} />
 				</Switch>
 			</Layout>
 		)
