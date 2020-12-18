@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState }    from 'react'
 import classes  from './Callback.module.sass'
 
@@ -21,10 +22,23 @@ function Callback() {
 
     function handleSubmit(event) {
         event.preventDefault()
+        
+        var data = {
+            name: name,
+            value: value,
+            message: message,
+        }
 
-        console.log('name:', name)
-        console.log('value:', value)
-        console.log('message:', message)
+        axios.post('//ecomangystau-backend/api/callback', data).then(response => {
+            // console.log(response.data)
+            alert(response.data.text)
+
+            setName('')
+            setValue('')
+            setMessage('')
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
     return (
@@ -35,13 +49,13 @@ function Callback() {
                         <h2 className={classes.title}>Связаться с нами</h2>
                         <form onSubmit={ event => handleSubmit(event) } className="row">
                             <div className="col-md-6">
-                                <input type="text" className={classes.input} placeholder={'Введите имя'} required onChange={ event => handleNameChange(event)} />
+                                <input type="text" value={name} className={classes.input} placeholder={'Введите имя'} required onChange={ event => handleNameChange(event)} />
                             </div>
                             <div className="col-md-6">
-                                <input type="text" name={'value'} className={classes.input} placeholder={'Как с вами связаться?'} required onChange={ event => handleValueChange(event)} />
+                                <input type="text" value={value} name={'value'} className={classes.input} placeholder={'Как с вами связаться?'} required onChange={ event => handleValueChange(event)} />
                             </div>
                             <div className="col-md-12">
-                                <textarea name="message" id="message" className={classes.textarea} placeholder={'Введите сообщение'} required onChange={ event => handleMessageChange(event)}></textarea>
+                                <textarea name="message" value={message} id="message" className={classes.textarea} placeholder={'Введите сообщение'} required onChange={ event => handleMessageChange(event)}></textarea>
                             </div>
                             <div className="col-md-12">
                                 <button type={'submit'} className={classes.btn}>Отправить</button>

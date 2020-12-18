@@ -8,6 +8,8 @@ import CategoryButton from '../../components/UI/CategoryButton/CategoryButtonNav
 import Loader from '../../components/Loaders/Services/Services'
 import Callback from '../../components/Callback/Callback'
 
+const API_URL = '//storage.ecomangystau.kz'
+
 class Services extends Component {
 
     constructor(props) {
@@ -17,7 +19,7 @@ class Services extends Component {
     }
     
     componentDidMount() {
-        axios.get('//storage.ecomangystau.kz/api/c/services').then(response => {
+        axios.get(API_URL + '/api/c/services').then(response => {
             this.setState({ article: response.data })
         }).finally(() => this.setState({ loading: false }))
     }
@@ -60,9 +62,9 @@ class Services extends Component {
                         
                         <div className="row">
 
-                            { this.state.article.articles.map(article => {
+                            { this.state.article.articles.map((article, index) => {
                                 return (
-                                    <div className="col-lg-6" key={ article.id }>
+                                    <div className="col-lg-6" key={ index }>
                                         <div className={classes.service}>
                                             <CategoryButton to={ article.url } title={ article.title } subtitle={ article.desc } />
                                         </div>
@@ -75,12 +77,12 @@ class Services extends Component {
                     </div>
                 </div>
 
-                <div className={classes.callback}>
-                    <Callback />
-                </div>
-
                 <div className={classes.article}>
                     { this.props.children }
+                </div>
+
+                <div className={classes.callback}>
+                    <Callback />
                 </div>
 
             </div>

@@ -10,6 +10,9 @@ import Gallery from '../../components/UI/Gallery/Gallery'
 import Content from '../../components/UI/ArticleContent/ArticleContent'
 import Loader from '../../components/Loaders/Page/Page'
 
+import NotFound from '../404/404'
+
+const API_URL = '//storage.ecomangystau.kz'
 
 class Page extends Component {
 
@@ -20,7 +23,12 @@ class Page extends Component {
 
     getArticle(category_slug, article_slug) {
         // window.scrollTo(0, 0)
-        axios.get('//storage.ecomangystau.kz/api/c/article/' + category_slug + '/' + article_slug + '').then(response => {
+        axios.get(API_URL + '/api/c/article/' + category_slug + '/' + article_slug + '').then(response => {
+
+            if (response.data.status === 404) {
+                this.setState({ notFound: true })
+            }
+
             this.setState({ article: response.data })
         }).finally(() => this.setState({ loading: false }))
     }
@@ -54,7 +62,10 @@ class Page extends Component {
                 </div>
             )
         } else {
-            // console.log(this.state.article)
+
+            if (this.state.notFound) {
+                return <NotFound />
+            }
 
             let image = () => {
                 if (this.state.article.image) {

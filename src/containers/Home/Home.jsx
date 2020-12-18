@@ -14,6 +14,7 @@ import ServicesSlider from '../../components/UI/ServicesSlider/ServicesSlider'
 import HomeLoader from '../../components/Loaders/Home/Home'
 import SEO 				from '../../components/SEO/SEO'
 
+const API_URL = '//storage.ecomangystau.kz'
 
 class Home extends Component {
 	state = {
@@ -104,7 +105,7 @@ class Home extends Component {
 	}
 
     componentDidMount() {	
-		axios.get('//storage.ecomangystau.kz/api/home').then(res => {			
+		axios.get(API_URL + '/api/home').then(res => {			
 
 			this.setState({ content: {
 				services: res.data.services,

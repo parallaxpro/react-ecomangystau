@@ -10,6 +10,8 @@ import NotFound from '../404/404'
 
 import classes from './Category.module.sass'
 
+const API_URL = '//storage.ecomangystau.kz'
+
 function Category() {
 	
 	const [setting, setSetting] 			= useState([])
@@ -24,19 +26,28 @@ function Category() {
 
 	function getSetting() {
 		window.scrollTo(0, 0)
-		axios.get('//storage.ecomangystau.kz/api/c/info' + window.location.pathname + '').then(response => {
+		axios.get(API_URL + '/api/c/info' + window.location.pathname + '').then(response => {
 			setSetting(response.data);
 			setCurrentSlug(window.location.pathname);
+
+			if (response.data.original.status === 404) {
+				setNotFound(true)
+			}
+
 		}).finally(() => setLoadingInfo(false))
 	}
 
 	function getData() {
-		axios.get(`//storage.ecomangystau.kz/api/c/articles` + window.location.pathname + `?page=1`)
+		axios.get(API_URL + `/api/c/articles` + window.location.pathname + `?page=1`)
 			.then(response => {
 				setArticles(response.data.articles)
 				setLastPage(response.data.pagination.lastPage + 1)
 				setLoading(false)
 				setCurrentPage(2)
+
+				if (response.data.status === 404) {
+					setNotFound(true)
+				}
 			})
 			.finally(() => {setFetching(false)})
 	}
@@ -50,7 +61,7 @@ function Category() {
 	useEffect(() => {
 		if (fetching) {
 			if (lastPage !== currentPage) {
-				axios.get(`//storage.ecomangystau.kz/api/c/articles` + window.location.pathname + `?page=${currentPage}`)
+				axios.get(API_URL + `/api/c/articles` + window.location.pathname + `?page=${currentPage}`)
 					.then(response => {
 						if (response.data.articles) {
 							setArticles(articles => [...articles, ...response.data.articles])
@@ -60,7 +71,6 @@ function Category() {
 						}
 
 						if (response.data.status === 404) {
-							setLoading(false)
 							setNotFound(true)
 						}
 					})
@@ -84,6 +94,11 @@ function Category() {
 	}
 
 	if (loading) {
+		
+		if (notFound) {
+			return <NotFound />
+		}
+
 		return (
 			<div className={classes.body}>
 				<div className={'container'}>
@@ -99,10 +114,6 @@ function Category() {
 			getSetting()
 			getData()
 		}
-	}
-
-	if (notFound) {
-		return <NotFound />
 	}
 
 	return (
