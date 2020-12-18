@@ -160,25 +160,19 @@
     ]
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@babel/core": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/register": "^7.12.10",
     "axios": "^0.21.0",
     "babel-loader": "^8.1.0",
+    "babel-preset-react-app": "^10.0.0",
+    "ignore-styles": "^5.0.1",
+    "react-google-recaptcha-v3": "^1.7.0",
     "react-snap": "^1.23.0",
     "react-yandex-metrika": "^2.6.0",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.12",
     "webpack-node-externals": "^1.7.2"
-=======
-    "@babel/preset-env": "^7.12.10",
-    "@babel/preset-react": "^7.12.10",
-    "@babel/register": "^7.12.10",
-    "axios": "^0.21.0",
-    "babel-preset-react-app": "^10.0.0",
-    "ignore-styles": "^5.0.1",
-    "react-yandex-metrika": "^2.6.0"
->>>>>>> 011855fd2be453af1fd1bbab7ccf9b1b7bf73602
   }
 }

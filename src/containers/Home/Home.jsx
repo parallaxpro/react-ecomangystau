@@ -104,7 +104,7 @@ class Home extends Component {
 	}
 
     componentDidMount() {	
-		axios.get('//ecomangystau-backend/api/home').then(res => {			
+		axios.get('//storage.ecomangystau.kz/api/home').then(res => {			
 
 			this.setState({ content: {
 				services: res.data.services,

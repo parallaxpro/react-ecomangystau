@@ -6,6 +6,7 @@ import classes from './Services.module.sass'
 import ShareButtons from '../../components/UI/ShareButtons/ShareButtons'
 import CategoryButton from '../../components/UI/CategoryButton/CategoryButtonNav'
 import Loader from '../../components/Loaders/Services/Services'
+import Callback from '../../components/Callback/Callback'
 
 class Services extends Component {
 
@@ -72,6 +73,10 @@ class Services extends Component {
                         </div>
 
                     </div>
+                </div>
+
+                <div className={classes.callback}>
+                    <Callback />
                 </div>
 
                 <div className={classes.article}>

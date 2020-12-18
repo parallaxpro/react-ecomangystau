@@ -9,7 +9,7 @@ class Search extends Component {
 	}
 	
 	_handleKeyDown(e) {
-		if (e.key === 'Enter') {
+		if (e.key === 'Enter' && e.target.value !== '') {
 			this.props.history.push(`/search?v=${e.target.value}`);
 		}
 	}

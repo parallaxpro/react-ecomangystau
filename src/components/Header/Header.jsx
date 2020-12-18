@@ -133,7 +133,7 @@ class Header extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('//ecomangystau-backend/api/menu/up').then(res => {			
+		axios.get('//storage.ecomangystau.kz/api/menu/up').then(res => {			
 			var $menu = res.data;
 			this.setState({ menuUp: $menu.up.map((index) => {
 				return index

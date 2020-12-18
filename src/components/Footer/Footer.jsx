@@ -52,7 +52,7 @@ class Footer extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('//ecomangystau-backend/api/footer').then(res => {			
+		axios.get('//storage.ecomangystau.kz/api/footer').then(res => {			
 			var footer = res.data;
 			this.setState({ footer: footer })
 			this.setState({ loading: false })

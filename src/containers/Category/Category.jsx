@@ -24,14 +24,14 @@ function Category() {
 
 	function getSetting() {
 		window.scrollTo(0, 0)
-		axios.get('//ecomangystau-backend/api/c/info' + window.location.pathname + '').then(response => {
+		axios.get('//storage.ecomangystau.kz/api/c/info' + window.location.pathname + '').then(response => {
 			setSetting(response.data);
 			setCurrentSlug(window.location.pathname);
 		}).finally(() => setLoadingInfo(false))
 	}
 
 	function getData() {
-		axios.get(`//ecomangystau-backend/api/c/articles` + window.location.pathname + `?page=1`)
+		axios.get(`//storage.ecomangystau.kz/api/c/articles` + window.location.pathname + `?page=1`)
 			.then(response => {
 				setArticles(response.data.articles)
 				setLastPage(response.data.pagination.lastPage + 1)
@@ -50,7 +50,7 @@ function Category() {
 	useEffect(() => {
 		if (fetching) {
 			if (lastPage !== currentPage) {
-				axios.get(`//ecomangystau-backend/api/c/articles` + window.location.pathname + `?page=${currentPage}`)
+				axios.get(`//storage.ecomangystau.kz/api/c/articles` + window.location.pathname + `?page=${currentPage}`)
 					.then(response => {
 						if (response.data.articles) {
 							setArticles(articles => [...articles, ...response.data.articles])
