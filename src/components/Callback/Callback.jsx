@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useState }    from 'react'
 import classes  from './Callback.module.sass'
 
+const API_URL = '//storage.ecomangystau.kz'
+
 function Callback() {
 
     const [name, setName] = useState()
@@ -29,7 +31,7 @@ function Callback() {
             message: message,
         }
 
-        axios.post('//ecomangystau-backend/api/callback', data).then(response => {
+        axios.post(API_URL + '/api/callback', data).then(response => {
             // console.log(response.data)
             alert(response.data.text)
 
