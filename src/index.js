@@ -33,5 +33,5 @@ class Index extends Component {
 	}
 }
 
-ReactDOM.render(<Index />, document.getElementById('root'));
+ReactDOM.hydrate(<Index />, document.getElementById('root'));
 reportWebVitals();
